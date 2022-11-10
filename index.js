@@ -1,18 +1,19 @@
 const express=require('express');
 const app=express();
-const PORT=3333;
+
 app.use(express.json());
 const {Pool}=require('pg');
 const bodyParser=require('body-parser');
 
 
+const config = require('./config')[process.env.NODE_ENV||"dev"]
+const PORT = config.port;
+
 const pool = new Pool({
-    user: 'postgres',
-    host: '127.0.0.1',
-    database: 'brandcars_db',
-    password: 'docker',
-    port: 5432,
-  });
+    connectionString: config.connectionString,
+});
+
+pool.connect();
 
 app.get('/',(req,res)=>{
     res.send('Hello Wolrd!')
