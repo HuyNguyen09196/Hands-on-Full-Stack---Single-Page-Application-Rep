@@ -1,0 +1,4 @@
+###
+GET http://localhost:3333/api/cars
+###
+GET http://localhost:3333/api/cars/1
